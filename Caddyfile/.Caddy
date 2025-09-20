@@ -1,0 +1,7 @@
+{
+    email alex.myreg@gmail.com  # כתובת מייל לרישום תעודות SSL
+}
+
+example.com {
+    reverse_proxy backend:5000  # הפניית תעבורה לשרת פנימי
+}
