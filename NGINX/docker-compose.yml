@@ -1,0 +1,28 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "3003:443"     # HTTPS served on port 3003
+      - "80:80"        # HTTP (needed for Certbot's challenge)
+      - "88:88"        # WEBHOOK
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - certs:/etc/letsencrypt
+      - html:/usr/share/nginx/html
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    restart: unless-stopped
+    volumes:
+      - certs:/etc/letsencrypt
+      - html:/var/www/certbot
+    # Initial run: this command obtains the certificate using the webroot method.
+    # After the first successful run, you can comment it out and set up a cron job or similar.
+    command: certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email alexepp@gmail.com -d my-star.duckdns.org --non-interactive
+
+volumes:
+  certs:
+  html:
