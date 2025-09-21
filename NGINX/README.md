@@ -68,5 +68,9 @@ http://127.0.0.1/   not localhost !
 ### 6. you can close the port 80
 
 
+### 7. nginx.conf
+    listen 88 ssl
+    redirect to http://host.docker.internal:5678; (n8n)
+
 
 
