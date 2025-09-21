@@ -46,3 +46,27 @@ The `docker-compose.yml` file defines two services:
     ```sh
     docker-compose down -v
     ```
+## Else
+### 1. Open port 80
+1. Windows Defender Firewall
+2. Inbound Rules
+3. TCP port 80
+
+### 2. Open port 80
+1. Port forwarding : 80 =>  [the target PC]:80
+
+### 3. Run nginx no certbot!
+1. comment certbot, run only nginx to test
+
+### 4. Test port 80
+http://127.0.0.1/   not localhost !
+5.29.181.75
+
+### 5. Run nginx and certbot!
+1. should download cartificate
+
+### 6. you can close the port 80
+
+
+
+
