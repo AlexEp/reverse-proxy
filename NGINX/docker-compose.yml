@@ -7,10 +7,16 @@ services:
       - "443:443" # HTTPS served on port 3003
       - "80:80" # Standard HTTP port for Certbot
       - "88:88" # Your custom port for n8n webhooks
+    networks:
+      - n1-shared-network
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro # Your config file
       - certs:/etc/letsencrypt # Shared volume for certs
       - ./www:/usr/share/nginx/html
+    # Add this section to permanently fix DNS errors
+    # dns:
+    #   - 8.8.8.8  # Google's public DNS
+    #   - 1.1.1.1  # Cloudflare's public DNS
 
   # certbot:
   #   # This is the fix. It tells Docker to build your custom image from the Dockerfile.
@@ -28,6 +34,9 @@ services:
   #     -d my-star.duckdns.org
   #     -d *.my-star.duckdns.org
   #     --expand
+networks:
+  n1-shared-network:
+    external: true # This tells Compose this network already exists
 
 volumes:
   certs:
